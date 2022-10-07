@@ -1,3 +1,5 @@
 import os
-os.system("mkdir data")
-os.system("head -c 1G </dev/urandom >data/big")
+import socket
+os.system("mkdir -p data")
+os.system("head -c 3G </dev/urandom >data/big")
+
