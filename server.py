@@ -1,10 +1,6 @@
 #!/usr/bin/python3           # This is server.py file
 import socket
 
-# create a socket object
-
-
-# get local machine name
 host = '0.0.0.0'
 
 port = 9700
