@@ -12,6 +12,9 @@ data/
 # recv
 recv/
 
+# .vscode
+.vscode/
+
 # .idea
 .idea/
 
