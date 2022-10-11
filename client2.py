@@ -4,7 +4,7 @@ HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-s.connect(('127.0.1.1', 9998))
+s.connect(('10.18.110.76', 9998))
 
 while True:
     full_msg = ''
