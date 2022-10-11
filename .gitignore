@@ -9,6 +9,12 @@ __pycache__/
 # data
 data/
 
+# recv
+recv/
+
+# .vscode
+.vscode/
+
 # .idea
 .idea/
 
