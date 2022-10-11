@@ -3,7 +3,7 @@ import tqdm
 import os
 
 SEPARATOR = "<SEPARATOR>"
-BUFFER_SIZE = 4096 # send 4096 bytes each time step
+BUFFER_SIZE = 1000000 # send 4096 bytes each time step
 
 # the ip address or hostname of the server, the receiver
 host = "10.18.110.76"
