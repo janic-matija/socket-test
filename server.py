@@ -2,26 +2,29 @@
 import socket
 
 # create a socket object
-serversocket = socket.socket(
-    socket.AF_INET, socket.SOCK_STREAM)
+
 
 # get local machine name
-host = socket.gethostname()
+host = '0.0.0.0'
 
-port = 9999
+port = 9700
 
-# bind to the port
-serversocket.bind((host, port))
+while port < 9750:
+    serversocket = socket.socket(
+        socket.AF_INET, socket.SOCK_STREAM)
+    serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-# queue up to 5 requests
-serversocket.listen(5)
+    serversocket.bind((host, port))
 
-while True:
-    # establish a connection
+    serversocket.listen(50)
+
     clientsocket, addr = serversocket.accept()
+    byte = clientsocket.recv(2)
+    nesto = int.from_bytes(byte, 'big')
+    print(nesto)
 
-    print("Got a connection from %s" % str(addr))
-
-    msg = 'Thank you for connecting' + "\r\n"
-    clientsocket.send(msg.encode('ascii'))
+    port += 1
     clientsocket.close()
+    serversocket.close()
+
+

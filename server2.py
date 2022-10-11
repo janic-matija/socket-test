@@ -9,7 +9,6 @@ s.bind(('', 1243))
 s.listen(5)
 
 while True:
-    # now our endpoint knows about the OTHER endpoint.
     clientsocket, address = s.accept()
     print(f"Connection from {address} has been established.")
 
