@@ -1,40 +1,41 @@
 import socket
 import threading
 
-import tqdm
-import os
-
-SEPARATOR = "<SEPARATOR>"
+SERVER_HOST = "10.18.110.76"
+SERVER_PORT = 5001
+ADDR = (SERVER_HOST, SERVER_PORT)
+UTF = "utf-8"
 BUFFER_SIZE = 4096
-
-host = "10.18.110.76"
-port = 5001
 filename = "../data/big"
 
 
-def send_to_server(conn, addr):
-    threading.current_thread().ident
-    print(f"[+] Connecting to {host}:{port}")
-    # conn.connect(addr)
+def main():
+    to_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    print(f"[+] Connecting to {SERVER_HOST}:{SERVER_PORT}")
+    to_server.connect((SERVER_HOST, SERVER_PORT))
     print("[+] Connected.")
 
-    with open(filename, "rb") as f:
-        bytes_read = f.read(BUFFER_SIZE)
-        if bytes_read:
-            bytes_read
-            # conn.sendall(bytes_read)
-    f.close()
-    conn.close()
-
-
-def main():
-    to_server = socket.socket()
-    addr = (host, port)
+    thr = 0
     while True:
-        thread = threading.Thread(target=send_to_server, args=(to_server, addr))
+        thread = threading.Thread(target=send_to_server, args=(to_server, ADDR, thr))
         thread.start()
-        print(f"[ACTIVE CONNECTIONS] {threading.active_count() - 1}")
+        thr += 1
+
+
+def send_to_server(conn, addr, thr):
+    print(thr*BUFFER_SIZE)
+    # with open(filename, "rb") as f:
+    #     f.seek(thr*BUFFER_SIZE)
+    #     bytes_read = f.read(BUFFER_SIZE)
+    #     if bytes_read:
+    #         conn.sendall(bytes_read)
+    # conn.close()
 
 
 if __name__ == "__main__":
     main()
+
+
+# Klijent nije dobro realizovan
+

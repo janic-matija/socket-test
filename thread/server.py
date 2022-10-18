@@ -5,8 +5,8 @@ SERVER_HOST = "0.0.0.0"  # any
 SERVER_PORT = 5001
 ADDR = (SERVER_HOST, SERVER_PORT)
 UTF = "utf-8"
-BUFFER_SIZE = 5
-filename = "../recv/text"
+BUFFER_SIZE = 4096
+filename = "../recv/big"
 
 
 def handle_client(conn, addr, thr):
@@ -38,3 +38,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Server koji hendluje vise klijenata
+# Ideja je bila da i klijent bude 'visenitni' ali to daje lose rezultate tj. nisam nasao dobar nacin za to
+# Server u ovom resenju upisuje primljene podatke od svake niti u poseban fajl
