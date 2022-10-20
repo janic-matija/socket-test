@@ -59,8 +59,8 @@ else:  # salje fajl
     ftp_client.close()
     print("poslato")
     stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/Projects/socket-test/socket-test/fromVM.py")
-
-    stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/paramiko/fromHost.py")
+    # print(stdout.readlines())
+    # print("izvrseno")
 
     client_socket, address = send_file_socket.accept()
     print(f"[+] {address} is connected.")

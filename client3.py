@@ -7,7 +7,7 @@ start_time = time.time()
 
 SEPARATOR = "<SEPARATOR>"
 BUFFER_SIZE = 1000000
-HOST = "10.18.110.76"
+HOST = "10.18.110.49"
 PORT = 5001
 filename = "data/big3"
 
