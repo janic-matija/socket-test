@@ -1,7 +1,12 @@
+import os
 import socket
+import sys
+import time
+
+start_time = time.time()
 
 SEPARATOR = "<SEPARATOR>"
-BUFFER_SIZE = 4096
+BUFFER_SIZE = 1000000
 HOST = "10.18.110.76"
 PORT = 5001
 filename = "data/big"
@@ -17,4 +22,8 @@ with open(filename, "rb") as f:
         if not bytes_read:
             break
         s.sendall(bytes_read)
+        # print(sys.getsizeof(bytes_read))
 s.close()
+
+end_time = time.time()
+print(str(end_time - start_time))

@@ -1,0 +1,24 @@
+1#################
+toGuest.py
+big3 - 3GB
+BUFFER_SIZE = 1000000
+[*] Listening as 0.0.0.0:9999
+[+] ('10.18.110.49', 51604) is connected.
+574.2603807449341
+
+2#################
+toGuestClient.py + toGuestServer.py
+big3 - 3GB
+BUFFER_SIZE = 1000000
+[*] Listening as 0.0.0.0:9999
+[+] ('10.18.110.49', 46466) is connected.
+455.1374077796936
+
+3#################
+toGuestClient.py + toGuestServer.py
+big3 - 3GB
+BUFFER_SIZE = 1000000
+[*] Listening as 0.0.0.0:9999
+[+] ('10.18.110.49', 38510) is connected.
+290.8615128993988
+
