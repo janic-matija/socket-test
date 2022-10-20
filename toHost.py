@@ -6,7 +6,7 @@ import time
 
 start_time = time.time()
 
-BUFFER_SIZE = 1000000
+BUFFER_SIZE = 8192
 HOST = "10.18.110.49"
 PORT = 9999
 SERVER_HOST = "0.0.0.0"  # any
@@ -55,7 +55,7 @@ else:  # salje fajl
 
     ftp_client = ssh.open_sftp()
     ftp_client.put('/home/matija/Projects/socket-test/toHost.py', '/home/matija/Projects/socket-test/socket-test'
-                                                                   '/fromVM.py')
+                                                                  '/fromVM.py')
     ftp_client.close()
     print("poslato")
     stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/Projects/socket-test/socket-test/fromVM.py")

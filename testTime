@@ -33,3 +33,12 @@ BUFFER_SIZE = 1000000
 [*] Listening as 0.0.0.0:9999
 [+] ('10.18.110.76', 58680) is connected.
 8.52105164527893
+
+5##################
+VM -> Host
+toHost.py
+big3 - 3GB
+BUFFER_SIZE = 1000000
+[*] Listening as 0.0.0.0:9999
+[+] ('10.18.110.76', 53218) is connected.
+25.014663696289062
