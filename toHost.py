@@ -54,7 +54,7 @@ else:  # salje fajl
                 password=pw, timeout=3)
 
     ftp_client = ssh.open_sftp()
-    ftp_client.put('/home/matija/Projects/socket-test/toGuest.py', '/home/matija/Projects/socket-test/socket-test'
+    ftp_client.put('/home/matija/Projects/socket-test/toHost.py', '/home/matija/Projects/socket-test/socket-test'
                                                                    '/fromVM.py')
     ftp_client.close()
     print("poslato")
