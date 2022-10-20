@@ -7,23 +7,24 @@ import time
 start_time = time.time()
 
 BUFFER_SIZE = 1000000
-HOST = "10.18.110.76"
+HOST = "10.18.110.49"
 PORT = 9999
 SERVER_HOST = "0.0.0.0"  # any
 SERVER_PORT = 9999
 
 stdin, stdout, stderr = "", "", ""
-# os.system("echo n")
 
-if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # prima fajl
-    # server = paramiko.server
-    os.system("mkdir -p /home/matija/from_host \n ")
-    print("nesto")
+print(sys.argv[0])
+if sys.argv[0] == "/home/matija/Projects/socket-test/socket-test/fromVM.py":  # prima fajl
+    print("fromVM u if")
 
-    file_recv = "/home/matija/from_host/big3"
+    file_recv = "/home/matija/Projects/socket-test/socket-test/recv/big3"
 
     recv_file_socket = socket.socket()
+    print("kreiran socket")
     recv_file_socket.connect((HOST, PORT))
+
+    print("konektovano?")
 
     with open(file_recv, "wb") as fr:
         while True:
@@ -31,8 +32,6 @@ if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # prima fajl
             if not bytes_read:
                 break
             fr.write(bytes_read)
-            # print(sys.getsizeof(bytes_read))
-            # fileNUm += 1
 
     recv_file_socket.close()
 
@@ -51,22 +50,21 @@ else:  # salje fajl
 
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-    ssh.connect(hostname='10.18.110.49', port=22, username='root',
+    ssh.connect(hostname='10.18.110.76', port=22, username='root',
                 password=pw, timeout=3)
 
     ftp_client = ssh.open_sftp()
-    ftp_client.put('/home/matija/Projects/socket-test/socket-test/toGuest.py', '/home/matija/paramiko/fromHost.py')
+    ftp_client.put('/home/matija/Projects/socket-test/toGuest.py', '/home/matija/Projects/socket-test/socket-test'
+                                                                   '/fromVM.py')
     ftp_client.close()
     print("poslato")
-    stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/paramiko/fromHost.py")
+    stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/Projects/socket-test/socket-test/fromVM.py")
     # print(stdout.readlines())
     # print("izvrseno")
 
     client_socket, address = send_file_socket.accept()
     print(f"[+] {address} is connected.")
     filename = "data/big3"
-    # fileNUm = 0
-    # with open(filename, "wb") as f:
     with open(filename, "rb") as f:
         while True:
             bytes_read = f.read(BUFFER_SIZE)

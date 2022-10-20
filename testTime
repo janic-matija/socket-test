@@ -1,4 +1,5 @@
 1#################
+Host -> VM
 toGuest.py
 big3 - 3GB
 BUFFER_SIZE = 1000000
@@ -7,6 +8,7 @@ BUFFER_SIZE = 1000000
 574.2603807449341
 
 2#################
+Host -> VM
 toGuestClient.py + toGuestServer.py
 big3 - 3GB
 BUFFER_SIZE = 1000000
@@ -15,6 +17,7 @@ BUFFER_SIZE = 1000000
 455.1374077796936
 
 3#################
+Host -> VM
 toGuestClient.py + toGuestServer.py
 big3 - 3GB
 BUFFER_SIZE = 1000000
@@ -22,3 +25,11 @@ BUFFER_SIZE = 1000000
 [+] ('10.18.110.49', 38510) is connected.
 290.8615128993988
 
+4##################
+VM -> Host
+toGuest.py
+big3 - 3GB
+BUFFER_SIZE = 1000000
+[*] Listening as 0.0.0.0:9999
+[+] ('10.18.110.76', 58680) is connected.
+8.52105164527893

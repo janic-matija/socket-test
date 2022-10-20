@@ -9,7 +9,7 @@ SEPARATOR = "<SEPARATOR>"
 BUFFER_SIZE = 1000000
 HOST = "10.18.110.76"
 PORT = 5001
-filename = "data/big"
+filename = "data/big3"
 
 s = socket.socket()
 print(f"[+] Connecting to {HOST}:{PORT}")
@@ -22,7 +22,6 @@ with open(filename, "rb") as f:
         if not bytes_read:
             break
         s.sendall(bytes_read)
-        # print(sys.getsizeof(bytes_read))
 s.close()
 
 end_time = time.time()
