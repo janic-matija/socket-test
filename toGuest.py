@@ -12,12 +12,8 @@ PORT = 9999
 SERVER_HOST = "0.0.0.0"  # any
 SERVER_PORT = 9999
 
-stdin, stdout, stderr = "", "", ""
-
 if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # prima fajl
-    # server = paramiko.server
     os.system("mkdir -p /home/matija/from_host \n ")
-    print("nesto")
 
     file_recv = "/home/matija/from_host/big3"
 
@@ -54,7 +50,6 @@ else:  # salje fajl
     ftp_client = ssh.open_sftp()
     ftp_client.put('/home/matija/Projects/socket-test/socket-test/toGuest.py', '/home/matija/paramiko/fromHost.py')
     ftp_client.close()
-    print("poslato")
     stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/paramiko/fromHost.py")
 
     client_socket, address = send_file_socket.accept()
