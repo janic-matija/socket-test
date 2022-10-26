@@ -1,4 +1,5 @@
 import socket
+import socketserver
 import sys
 import os
 import paramiko
@@ -6,18 +7,23 @@ import time
 
 start_time = time.time()
 
-BUFFER_SIZE = 1000000
+BUFFER_SIZE = 10000
 HOST = "10.18.110.76"
-PORT = 9999
+PORT = 9990
 SERVER_HOST = "0.0.0.0"  # any
-SERVER_PORT = 9999
+SERVER_PORT = 9990
+socketserver.TCPServer.request_queue_size = 100
+print(socketserver.TCPServer.request_queue_size)
 
 if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # prima fajl
     os.system("mkdir -p /home/matija/from_host \n ")
 
-    file_recv = "/home/matija/from_host/big3"
+    file_recv = "/home/matija/from_host/big1"
 
     recv_file_socket = socket.socket()
+    # print(socket.TCP_MAXSEG)
+    # recv_file_socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_MAXSEG, 400)
+    # print(socket.TCP_MAXSEG)
     recv_file_socket.connect((HOST, PORT))
 
     with open(file_recv, "wb") as fr:
@@ -32,10 +38,12 @@ if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # prima fajl
 else:  # salje fajl
 
     send_file_socket = socket.socket()
+    # send_file_socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_MAXSEG, 400)
 
+    send_file_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     send_file_socket.bind((SERVER_HOST, SERVER_PORT))
 
-    send_file_socket.listen(5)
+    send_file_socket.listen(65535)
     print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
 
     with open("IP/pw", 'r') as passFile:
@@ -54,7 +62,7 @@ else:  # salje fajl
 
     client_socket, address = send_file_socket.accept()
     print(f"[+] {address} is connected.")
-    filename = "data/big3"
+    filename = "data/big1"
     with open(filename, "rb") as f:
         while True:
             bytes_read = f.read(BUFFER_SIZE)
