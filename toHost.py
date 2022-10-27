@@ -18,7 +18,7 @@ print(sys.argv[0])
 if sys.argv[0] == "/home/matija/Projects/socket-test/socket-test/fromVM.py":  # prima fajl
     print("fromVM u if")
 
-    file_recv = "/home/matija/Projects/socket-test/socket-test/recv/big3"
+    file_recv = "/home/matija/Projects/socket-test/socket-test/recv/big1G"
 
     recv_file_socket = socket.socket()
     print("kreiran socket")
@@ -64,7 +64,7 @@ else:  # salje fajl
 
     client_socket, address = send_file_socket.accept()
     print(f"[+] {address} is connected.")
-    filename = "data/big3"
+    filename = "data/big1"
     with open(filename, "rb") as f:
         while True:
             bytes_read = f.read(BUFFER_SIZE)
