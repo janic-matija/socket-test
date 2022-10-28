@@ -21,3 +21,5 @@ https://udt.sourceforge.io/
 
 
 https://computingforgeeks.com/virsh-commands-cheatsheet/
+
+https://gist.github.com/nrdmn/7971be650919b112343b1cb2757a3fe6
