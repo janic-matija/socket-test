@@ -42,3 +42,14 @@ BUFFER_SIZE = 1000000
 [*] Listening as 0.0.0.0:9999
 [+] ('10.18.110.76', 53218) is connected.
 25.014663696289062
+
+
+
+
+
+SCP test
+#################
+VM->HOST
+scp big1 root@10.18.110.76:/home/something/from_host
+root@10.18.110.76's password: 
+big1                                          100% 1024MB 233.2MB/s   00:04 
