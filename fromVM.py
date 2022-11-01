@@ -45,7 +45,7 @@ else:  # salje fajl
     send_file_socket.listen(5)
     print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
     print(f"listening {time.time()-start_time}")
-    with open("IP/pw", 'r') as passFile:
+    with open("/home/matija/Projects/socket-test/IP/pw", 'r') as passFile:
         pw = passFile.readline()
     ssh = paramiko.SSHClient()
 
@@ -67,7 +67,7 @@ else:  # salje fajl
 
     client_socket, address = send_file_socket.accept()
     print(f"[+] {address} is connected.")
-    filename = "data/big3"
+    filename = "/home/matija/Projects/socket-test/data/big3"
     brojac = 0
     with open(filename, "rb") as f:
         while True:
