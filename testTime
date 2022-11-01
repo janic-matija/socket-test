@@ -54,7 +54,12 @@ scp big1 root@10.18.110.76:/home/something/from_host
 root@10.18.110.76's password: 
 big1                                          100% 1024MB 233.2MB/s   00:04 
 ##################
-VM->HOST
-scp big4 root@10.18.110.76:/home/matija/from_host
-root@10.18.110.76's password: 
-big4                                          100% 3072MB 106.7MB/s   00:28  
+VM -> HOST
+scp big root@1.1.1.76:/home/something/from_vm
+root@1.1.1.76's password: 
+big                                           100% 3072MB 106.7MB/s   00:28  
+##################
+HOST -> VM
+scp big root@1.1.1.49:/home/something/from_host
+root@1.1.1.49's password: 
+big                                           100% 3072MB   9.9MB/s   05:12
