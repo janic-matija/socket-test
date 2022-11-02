@@ -1,9 +1,10 @@
-from socket import *
+import socket
 import os
 
-CHUNKSIZE = 1_000_000
+BUFF = 1_000_000
 
-sock = socket()
+sock = socket.socket()
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 sock.bind(('', 9000))
 sock.listen(65535)
 
@@ -24,9 +25,11 @@ while True:
                     client.sendall(relpath.encode() + b'\n')
                     client.sendall(str(filesize).encode() + b'\n')
 
-                    # Send the file in chunks so large files can be handled.
                     while True:
-                        data = f.read(CHUNKSIZE)
+                        data = f.read(BUFF)
                         if not data: break
                         client.sendall(data)
         print('Done.')
+        break
+sock.close()
+

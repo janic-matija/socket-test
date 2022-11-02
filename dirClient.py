@@ -1,14 +1,15 @@
 import time
-from socket import *
+import socket
 import os
 
 start = time.time()
-CHUNKSIZE = 1_000_000
+BUFF = 1_000_000
 
 # Make a directory for the received files.
 os.makedirs('client', exist_ok=True)
 
-sock = socket()
+sock = socket.socket()
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 sock.connect(('10.18.110.76', 9000))
 with sock, sock.makefile('rb') as clientfile:
     while True:
@@ -22,19 +23,18 @@ with sock, sock.makefile('rb') as clientfile:
         path = os.path.join('client', filename)
         os.makedirs(os.path.dirname(path), exist_ok=True)
 
-        # Read the data in chunks so it can handle large files.
         with open(path, 'wb') as f:
             while length:
-                chunk = min(length, CHUNKSIZE)
-                data = clientfile.read(chunk)
+                buf = min(length, BUFF)
+                data = clientfile.read(buf)
                 if not data: break
                 f.write(data)
                 length -= len(data)
-            else:  # only runs if while doesn't break and length==0
+            else:
                 print('Complete')
                 continue
 
         # socket was closed early.
         print('Incomplete')
         break
-print(time.time()-start)
+print(time.time() - start)
