@@ -5,7 +5,7 @@ CHUNKSIZE = 1_000_000
 
 sock = socket()
 sock.bind(('', 9000))
-sock.listen(1)
+sock.listen(65535)
 
 while True:
     print('Waiting for a client...')

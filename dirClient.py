@@ -1,6 +1,8 @@
+import time
 from socket import *
 import os
 
+start = time.time()
 CHUNKSIZE = 1_000_000
 
 # Make a directory for the received files.
@@ -35,3 +37,4 @@ with sock, sock.makefile('rb') as clientfile:
         # socket was closed early.
         print('Incomplete')
         break
+print(time.time()-start)
