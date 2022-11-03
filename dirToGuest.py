@@ -6,7 +6,7 @@ import os
 import paramiko
 
 start = time.time()
-BUFF = 1_000_000
+BUFF = 1_000_000_000
 HOST = "10.18.110.49"
 SERVER_HOST = "0.0.0.0"  # any
 PORT = 9989
@@ -91,6 +91,10 @@ if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # server prima fajl
 
     server_sock = socket.socket()
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_sock.setsockopt(
+        socket.SOL_SOCKET,
+        socket.SO_RCVBUF,
+        BUFF)
     server_sock.bind((SERVER_HOST, PORT))
     server_sock.listen(65535)
     client, address = server_sock.accept()
@@ -101,7 +105,11 @@ else:
     ssh_send('10.18.110.49', 22, 'root', "IP/pw")
     client_sock = socket.socket()
     client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    time.sleep(0.1)
+    client_sock.setsockopt(
+        socket.SOL_SOCKET,
+        socket.SO_SNDBUF,
+        BUFF)
+    time.sleep(0.7)
     client_sock.connect((HOST, PORT))
     send_dir('client', client_sock)
     client_sock.close()
