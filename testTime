@@ -85,3 +85,22 @@ VM -> HOST
 6.8039751052856445
 
 
+
+
+
+
+
+
+
+VM: Network Adapter podesen na NAT
+#################################
+HOST -> VM
+dirServer.py(H)+dirClient.py(VM)
+data:4.4GB
+60.07985591888428
+#################################
+HOST -> VM
+dirServer.py+dirClient.py
+data:4.4GB
+45.17951250076294
+

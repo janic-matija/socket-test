@@ -7,9 +7,9 @@ import paramiko
 
 start = time.time()
 BUFF = 1_000_000_000
-HOST = "10.18.110.49"
+HOST = "192.168.69.128"
 SERVER_HOST = "0.0.0.0"  # any
-PORT = 9989
+PORT = 9999
 
 
 def ssh_send(hn, p, u, pw):
@@ -27,6 +27,7 @@ def ssh_send(hn, p, u, pw):
     ftp_client.put('/home/matija/Projects/socket-test/socket-test/dirToGuest.py', '/home/matija/paramiko/fromHost.py')
     ftp_client.close()
     stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/paramiko/fromHost.py")
+    print(stdout.readlines())
     del ftp_client, stdin, stdout, stderr
 
 
@@ -87,31 +88,41 @@ def send_dir(folder, sock):
             break
 
 
+# def main():
 if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # server prima fajl
 
+    print("usao")
     server_sock = socket.socket()
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_sock.setsockopt(
         socket.SOL_SOCKET,
         socket.SO_RCVBUF,
         BUFF)
+    print("bind")
     server_sock.bind((SERVER_HOST, PORT))
+
     server_sock.listen(65535)
     client, address = server_sock.accept()
     recv_dir('server', client)
 
     server_sock.close()
 else:
-    ssh_send('10.18.110.49', 22, 'root', "IP/pw")
+    # ssh_send('192.168.69.128', 22, 'root', "IP/pw")
     client_sock = socket.socket()
     client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     client_sock.setsockopt(
         socket.SOL_SOCKET,
         socket.SO_SNDBUF,
         BUFF)
-    time.sleep(0.7)
+    time.sleep(5)
+    print("budan")
     client_sock.connect((HOST, PORT))
+    print("konektovan")
     send_dir('client', client_sock)
     client_sock.close()
 
     print(time.time() - start)
+
+
+# if __name__ == "__main__":
+#     main()
