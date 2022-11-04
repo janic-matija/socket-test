@@ -63,3 +63,44 @@ HOST -> VM
 scp big root@1.1.1.49:/home/something/from_host
 root@1.1.1.49's password: 
 big                                           100% 3072MB   9.9MB/s   05:12
+
+
+
+RSYNC
+#########################
+HOST -> VM
+1GB
+216.6238625049591
+#########################
+HOST -> VM
+1GB
+225.34056043624878
+#########################
+VM -> HOST
+1GB
+13.146835565567017
+#########################
+VM -> HOST
+1GB
+6.8039751052856445
+
+
+
+
+
+
+
+
+
+VM: Network Adapter podesen na NAT
+#################################
+HOST -> VM
+dirServer.py(H)+dirClient.py(VM)
+data:4.4GB
+60.07985591888428
+#################################
+HOST -> VM
+dirServer.py+dirClient.py
+data:4.4GB
+45.17951250076294
+

@@ -5,7 +5,6 @@ import os
 start = time.time()
 BUFF = 1_000_000
 
-# Make a directory for the received files.
 os.makedirs('client', exist_ok=True)
 
 sock = socket.socket()
@@ -14,7 +13,7 @@ sock.connect(('10.18.110.76', 9000))
 with sock, sock.makefile('rb') as clientfile:
     while True:
         raw = clientfile.readline()
-        if not raw: break  # no more files, server closed connection.
+        if not raw: break
 
         filename = raw.strip().decode()
         length = int(clientfile.readline())
@@ -34,7 +33,7 @@ with sock, sock.makefile('rb') as clientfile:
                 print('Complete')
                 continue
 
-        # socket was closed early.
+        # socket closed
         print('Incomplete')
         break
 print(time.time() - start)
