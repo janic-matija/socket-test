@@ -27,7 +27,7 @@ def ssh_send(hn, p, u, pw):
     ftp_client.put('/home/matija/Projects/socket-test/socket-test/dirToGuest.py', '/home/matija/paramiko/fromHost.py')
     ftp_client.close()
     stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/paramiko/fromHost.py")
-    print(stdout.readlines())
+    # print(stdout.readlines())69
     del ftp_client, stdin, stdout, stderr
 
 
