@@ -92,7 +92,7 @@ VM -> HOST
 
 
 
-VM: Network Adapter podesen na NAT
+VM: Network Adapter podesen na NAT (VMWare)
 #################################
 HOST -> VM
 dirServer.py(H)+dirClient.py(VM)
@@ -104,3 +104,16 @@ dirServer.py+dirClient.py
 data:4.4GB
 45.17951250076294
 
+
+
+virt manager (NAT)
+###############################
+HOST -> VM
+dirServer.py+dirClient.py
+data:4.4GB
+5.305210590362549
+###############################
+HOST -> VM
+dirServer.py+dirClient.py
+data:7.6GB
+9.277067184448242
