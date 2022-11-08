@@ -110,10 +110,24 @@ virt manager (NAT)
 ###############################
 HOST -> VM
 dirServer.py+dirClient.py
-data:4.4GB
+data:4.4 GB
 5.305210590362549
 ###############################
 HOST -> VM
 dirServer.py+dirClient.py
-data:7.6GB
+data:7.6 GB
 9.277067184448242
+
+
+
+virt manager (NAT)
+###############################
+VM -> HOST
+dirServer.py+dirClient.py
+data:29.3 GB
+43.01428723335266
+###############################
+HOST -> VM
+dirServer.py+dirClient.py
+data:29.3 GB
+43.01428723335266

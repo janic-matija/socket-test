@@ -9,7 +9,7 @@ os.makedirs('client', exist_ok=True)
 
 sock = socket.socket()
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-sock.connect(('10.18.110.76', 9000))
+sock.connect(('192.168.122.17', 9000))
 with sock, sock.makefile('rb') as clientfile:
     while True:
         raw = clientfile.readline()
