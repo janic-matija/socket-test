@@ -5,7 +5,9 @@ BUFF = 1_000_000_000
 
 sock = socket.socket()
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-# sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_MAXSEG, 10000)
+# sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_FASTOPEN, 1)
+# sock.setsockopt(socket.SOL_TCP, socket., b'reno')
+sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_MAXSEG, 10000)
 # print(sock.getsockopt(socket.IPPROTO_TCP, socket.TCP_MAXSEG))
 sock.bind(('', 9000))
 sock.listen(65535)
@@ -34,4 +36,3 @@ while True:
         print('Done.')
         break
 sock.close()
-
