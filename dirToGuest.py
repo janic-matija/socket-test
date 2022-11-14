@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+import subprocess
 import sys
 import time
 import socket
@@ -7,7 +9,7 @@ import paramiko
 
 start = time.time()
 BUFF = 1_000_000_000
-HOST = "192.168.69.128"
+HOST = "192.168.122.216"
 SERVER_HOST = "0.0.0.0"  # any
 PORT = 9999
 
@@ -23,11 +25,17 @@ def ssh_send(hn, p, u, pw):
     ssh.connect(hostname=hn, port=p, username=u,
                 password=pw, timeout=3)
 
+    stdin, stdout, stderr = ssh.exec_command("mkdir -p /tempdir")
+    this_dir = str(subprocess.check_output(['pwd']))[2:-3] + "/"
+    this_file = this_dir + os.path.basename(__file__)
+    print(this_file)
+
     ftp_client = ssh.open_sftp()
-    ftp_client.put('/home/matija/Projects/socket-test/socket-test/dirToGuest.py', '/home/matija/paramiko/fromHost.py')
+
+    ftp_client.put(this_file, '/tempdir/fromHost.py')
     ftp_client.close()
-    stdin, stdout, stderr = ssh.exec_command("python3 /home/matija/paramiko/fromHost.py")
-    # print(stdout.readlines())69
+    stdin, stdout, stderr = ssh.exec_command("python3 /tempdir/fromHost.py")
+    # print(stdout.readlines())
     del ftp_client, stdin, stdout, stderr
 
 
@@ -41,7 +49,7 @@ def recv_dir(folder, sock):
                 break
             filename = raw.strip().decode()
             length = int(serverfile.readline())
-            print(f'Downloading {filename}...\n  Expecting {length:,} bytes...', end='', flush=True)
+            # print(f'Downloading {filename}...\n  Expecting {length:,} bytes...', end='', flush=True)
 
             path = os.path.join(folder, filename)
             os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -54,11 +62,11 @@ def recv_dir(folder, sock):
                     f.write(data)
                     length -= len(data)
                 else:
-                    print('Complete')
+                    # print('Complete')
                     continue
 
             # interrupt
-            print('Incomplete')
+            # print('Incomplete')
     from_client.close()
 
 
@@ -67,10 +75,10 @@ def send_dir(folder, sock):
     while True:
         print(f'Client conected to {HOST}:{PORT}')
         with to_server:
-            for path, dirs, files in os.walk('client'):
+            for path, dirs, files in os.walk(folder):
                 for file in files:
                     filename = os.path.join(path, file)
-                    relpath = os.path.relpath(filename, 'client')
+                    relpath = os.path.relpath(filename, folder)
                     filesize = os.path.getsize(filename)
 
                     print(f'Sending {relpath}')
@@ -89,25 +97,25 @@ def send_dir(folder, sock):
 
 
 # def main():
-if sys.argv[0] == '/home/matija/paramiko/fromHost.py':  # server prima fajl
+if sys.argv[0] == '/tempdir/fromHost.py':  # server prima fajl
 
-    print("usao")
+    # print("usao")
     server_sock = socket.socket()
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_sock.setsockopt(
         socket.SOL_SOCKET,
         socket.SO_RCVBUF,
         BUFF)
-    print("bind")
+    # print("bind")
     server_sock.bind((SERVER_HOST, PORT))
 
     server_sock.listen(65535)
     client, address = server_sock.accept()
-    recv_dir('server', client)
+    recv_dir('/tempdir/server', client)
 
     server_sock.close()
 else:
-    # ssh_send('192.168.69.128', 22, 'root', "IP/pw")
+    ssh_send('192.168.122.216', 22, 'root', "IP/pw")
     client_sock = socket.socket()
     client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     client_sock.setsockopt(
@@ -118,11 +126,10 @@ else:
     print("budan")
     client_sock.connect((HOST, PORT))
     print("konektovan")
-    send_dir('client', client_sock)
+    send_dir('data', client_sock)
     client_sock.close()
 
     print(time.time() - start)
-
 
 # if __name__ == "__main__":
 #     main()
