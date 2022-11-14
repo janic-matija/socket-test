@@ -35,8 +35,7 @@ def ssh_send(hn, p, u, pw):
     ftp_client.put(this_file, '/tempdir/fromHost.py')
     ftp_client.close()
     stdin, stdout, stderr = ssh.exec_command("python3 /tempdir/fromHost.py")
-    print("fromhost")
-    #print(stdout.readlines())
+    print(stdout.readlines())
     del ftp_client, stdin, stdout, stderr
 
 
@@ -106,7 +105,9 @@ if sys.argv[0] == '/tempdir/fromHost.py':  # server prima fajl
         socket.SOL_SOCKET,
         socket.SO_SNDBUF,
         BUFF)
-    guest_sock.connect(('192.168.122.17', PORT))
+    print("connecting")
+    guest_sock.connect(('10.18.110.76', PORT))
+    print("connected")
     recv_dir('/tempdir/server', guest_sock)
     guest_sock.close()
 else:
@@ -117,12 +118,15 @@ else:
         socket.SOL_SOCKET,
         socket.SO_RCVBUF,
         BUFF)
-    ssh_send('192.168.122.17', 22, 'root', "IP/pw")
+
+    print("binding")
     host_sock.bind(('0.0.0.0', PORT))
+    print("listening")
     host_sock.listen(65535)
-
+    ssh_send('192.168.122.17', 22, 'root', "IP/pw")
+    print("accepting")
     guest, address = host_sock.accept()
-
+    print("accepted")
     send_dir('data', guest)
     guest.close()
     host_sock.close()

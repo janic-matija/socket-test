@@ -25,9 +25,9 @@ def ssh_send(hn, p, u, pw):
     ssh.connect(hostname=hn, port=p, username=u,
                 password=pw, timeout=3)
 
-    stdin, stdout, stderr = ssh.exec_command("mkdir -p /tempdir")
-    this_dir = str(subprocess.check_output(['pwd']))[2:-3] + "/"
-    this_file = this_dir + os.path.basename(__file__)
+    stdin, stdout, stderr = ssh.exec_command("mkdir -p /tempdir")  # odredisni folder
+    this_dir = str(subprocess.check_output(['pwd']))[2:-3] + "/"  # trenutni folder
+    this_file = this_dir + os.path.basename(__file__)  # ime skripte
     print(this_file)
 
     ftp_client = ssh.open_sftp()
@@ -122,7 +122,7 @@ else:
         socket.SOL_SOCKET,
         socket.SO_SNDBUF,
         BUFF)
-    time.sleep(5)
+    time.sleep(5)  # pauza radi uskladjivanja accept i connect, lose resenje
     print("budan")
     client_sock.connect((HOST, PORT))
     print("konektovan")
