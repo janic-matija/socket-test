@@ -58,7 +58,8 @@ def recv_dir(folder, sock):
                 while length:
                     buf = min(length, BUFF)
                     data = serverfile.read(buf)
-                    if not data: break
+                    if not data:
+                        break
                     f.write(data)
                     length -= len(data)
                 else:
