@@ -1,25 +1,18 @@
-# # socket-test
+#startup.service
 
-# sockets:
-https://pythonprogramming.net/sockets-tutorial-python-3/
+	$ sudo mv dirFromHost.py /etc/systemd/system
+	$ sudo systemctl enable startup.service
+	$ sudo systemctl start startup.service
+##1 socket
 
-https://realpython.com/python-sockets/
+	#dirFromHost.py
+		Guest: autostart (startup.service)
+	#dirToGuest.py
+		Host: executable?
 
-https://docs.python.org/3/howto/sockets.html#socket-howto
-
-https://docs.python.org/3/library/socket.html#
-
-# UDT (UDP-based Data Transfer Protocol):
-
-https://stackoverflow.com/questions/7222852/python-wrapper-for-udt-c-library ??
-
-https://sourceforge.net/projects/udt/
-
-https://udt.sourceforge.io/doc/udt-sc08-poster.pdf
-
-https://udt.sourceforge.io/
-
-
-https://computingforgeeks.com/virsh-commands-cheatsheet/
-
-https://gist.github.com/nrdmn/7971be650919b112343b1cb2757a3fe6
+##2 socket
+	#sendDir.py
+		ssh slanje skripte (bez autostart)
+##3 rsync
+	#rsyncToGuest.py
+		rsync slanje aktivnim Guest-ovima (bez autostart)

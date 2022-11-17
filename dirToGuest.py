@@ -4,7 +4,7 @@ import os
 
 start = time.time()
 BUFF = 1_000_000_000
-HOST = "192.168.122.17"
+HOST = "192.168.100.231"
 PORT = 9999
 
 
