@@ -11,8 +11,11 @@
 		Host: executable?
 
 ##2 socket
+
 	#sendDir.py
 		ssh slanje skripte (bez autostart)
+
 ##3 rsync
+
 	#rsyncToGuest.py
 		rsync slanje aktivnim Guest-ovima (bez autostart)
