@@ -1,8 +1,8 @@
-# startup.service
+# listen.service
 
-	$ sudo mv dirFromHost.py /etc/systemd/system
-	$ sudo systemctl enable startup.service
-	$ sudo systemctl start startup.service
+	$ sudo mv listen.service /etc/systemd/system
+	$ sudo listen enable startup.service
+	$ sudo listen start startup.service
 # #1 socket
 # 	dirFromHost.py
 	Guest: autostart (startup.service)

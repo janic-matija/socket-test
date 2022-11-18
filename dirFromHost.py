@@ -40,8 +40,8 @@ def main():
     server_sock.bind((SERVER_HOST, PORT))
     server_sock.listen(65535)
     while True:
-	client, address = server_sock.accept()
-	recv_dir('/tempdir/server', client)
+        client, address = server_sock.accept()
+        recv_dir('/tempdir/server', client)
 
     server_sock.close()
 
