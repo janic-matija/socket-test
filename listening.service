@@ -1,0 +1,14 @@
+[Unit]
+Description=Waiting Host
+After=network.target
+
+[Service]
+ExecStart=sudo /usr/bin/python3 dirFromHost.py
+WorkingDirectory=/bin
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

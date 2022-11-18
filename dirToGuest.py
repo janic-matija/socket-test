@@ -5,15 +5,15 @@ import subprocess
 
 start = time.time()
 BUFF = 1_000_000_000
-HOST = "192.168.122.216"
+HOST = "192.168.122.17"
+HOST2 = "192.168.100.231"
 PORT = 9990
 
 
 def active_ips():
-    addresses=[]
+    addresses = []
     command = 'virsh list --name'
     vms = str(subprocess.check_output(command.split()).decode("utf-8")).splitlines()
-    #if len(vms) > 1:
     for i in range(0, len(vms) - 1):
         command = 'virsh domifaddr ' + str(vms[i])
         info = (str(subprocess.check_output(command.split()).decode("utf-8"))).splitlines()
@@ -48,18 +48,18 @@ def send_dir(folder, sock):
             break
 
 
-client_sock = socket.socket()
-client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-client_sock.setsockopt(
-    socket.SOL_SOCKET,
-    socket.SO_SNDBUF,
-    BUFF)
 send_to = active_ips()
-#for ip in send_to:
-print('connecting')
-client_sock.connect((HOST, PORT))
-print('connected')
-send_dir('data', client_sock)
-client_sock.close()
+print(send_to)
+for ip in send_to:
+    client_sock = socket.socket()
+    client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    client_sock.setsockopt(
+        socket.SOL_SOCKET,
+        socket.SO_SNDBUF,
+        BUFF)
+
+    client_sock.connect((ip, PORT))
+    send_dir('data', client_sock)
+    client_sock.close()
 
 print(time.time() - start)
