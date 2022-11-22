@@ -1,3 +1,4 @@
+import sys
 import time
 import socket
 import os
@@ -48,18 +49,29 @@ def send_dir(folder, sock):
             break
 
 
-send_to = active_ips()
-print(send_to)
-for ip in send_to:
-    client_sock = socket.socket()
-    client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    client_sock.setsockopt(
-        socket.SOL_SOCKET,
-        socket.SO_SNDBUF,
-        BUFF)
+def main():
+    start_time = start
+    send_to = active_ips()
+    if len(sys.argv) > 1:
+        send_to = ['10.18.110.57']
+    print(send_to)
 
-    client_sock.connect((ip, PORT))
-    send_dir('data', client_sock)
-    client_sock.close()
+    for ip in send_to:
+        print(ip)
+        client_sock = socket.socket()
+        client_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        client_sock.setsockopt(
+            socket.SOL_SOCKET,
+            socket.SO_SNDBUF,
+            BUFF)
+        client_sock.connect((ip, PORT))
+        send_dir('data2', client_sock)
+        client_sock.close()
+        print(time.time() - start_time, end="\n\n")
+        start_time = time.time()
 
-print(time.time() - start)
+    print(time.time() - start)
+
+
+if __name__ == "__main__":
+    main()

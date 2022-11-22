@@ -3,7 +3,7 @@ import os
 
 BUFF = 1_000_000_000
 SERVER_HOST = "0.0.0.0"  # any
-PORT = 9990
+PORT = 9999
 
 
 def recv_dir(folder, sock):
@@ -35,15 +35,16 @@ def recv_dir(folder, sock):
 
 def main():
     server_sock = socket.socket()
-    server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, BUFF)
-    server_sock.bind((SERVER_HOST, PORT))
-    server_sock.listen(65535)
-    while True:
-        client, address = server_sock.accept()
-        recv_dir('/tempdir/server', client)
-
-    server_sock.close()
+    try:
+        server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, BUFF)
+        server_sock.bind((SERVER_HOST, PORT))
+        server_sock.listen(65535)
+        while True:
+            client, address = server_sock.accept()
+            recv_dir('/tempdir/server', client)
+    except:
+        server_sock.close()
 
 
 if __name__ == "__main__":
