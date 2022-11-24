@@ -3,7 +3,7 @@ import os
 
 BUFF = 1_000_000_000
 SERVER_HOST = "0.0.0.0"  # any
-PORT = 9990
+PORT = 9999
 
 
 def recv_dir(folder, sock):
