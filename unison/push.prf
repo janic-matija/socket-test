@@ -1,0 +1,25 @@
+# Two root directories to sync.
+# You can use ssh:// to sync over SSH
+root = /home/matija/unison/sync
+root = ssh://root@10.18.110.76//home/matija/unison
+
+# If you want one-way mirroring from one replica to the other, specify the source replica using "force" as follows.
+force = /home/matija/unison/sync
+
+# If you want Unison to run without any user input, try "batch" mode.
+batch = true
+
+# If you don't want to be prompted, and just accept Unison's recommendation:
+auto = true
+
+# Optionally, you can sync specific sub directories only (under the root).
+# path = dir1
+# path = dir2
+
+# Optionally, you can ignore specific files or directories that are matched with regular expressions.
+# ignore = Name *.o
+# ignore = Name *~
+# ignore = Path */temp/archive_*
+
+# If you want to ignore difference in file props:
+perms = 0
