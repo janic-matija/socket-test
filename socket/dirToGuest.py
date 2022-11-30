@@ -65,7 +65,7 @@ def main():
             socket.SO_SNDBUF,
             BUFF)
         client_sock.connect((ip, PORT))
-        send_dir('data2', client_sock)
+        send_dir('../data2', client_sock)
         client_sock.close()
         print(time.time() - start_time, end="\n\n")
         start_time = time.time()

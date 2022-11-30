@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync daily
+
+[Timer]
+OnCalendar=*-*-* 18:13:00
+Unit=sync.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target

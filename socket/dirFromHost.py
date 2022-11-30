@@ -48,7 +48,7 @@ def main():
             if platform.uname().system == 'Windows':
                 folder='C:/ProgramData/tempdir/data'
             elif platform.uname().system == 'Ubuntu':
-                folder='C:/ProgramData/tempdir/data'
+                folder='/tempdir/data'
             recv_dir(folder, client)
     except:
         server_sock.close()

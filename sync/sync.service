@@ -1,0 +1,9 @@
+[Unit]
+Description=Starting sync
+Wants=sync.timer
+
+[Service]
+Type=oneshot
+ExecStart=sudo /usr/bin/python3 sync.py
+WorkingDirectory=/bin
+User=root
