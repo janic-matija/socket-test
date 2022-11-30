@@ -2,7 +2,7 @@
 Description=Sync daily
 
 [Timer]
-OnCalendar=*-*-* 18:13:00
+OnCalendar=*-*-* 00:00:01
 Unit=sync.service
 Persistent=true
 
