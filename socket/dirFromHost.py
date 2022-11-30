@@ -35,8 +35,13 @@ def recv_dir(folder, sock):
 
 
 def main():
+    folder = ''
+    # print(platform.uname().system)
+    if platform.uname().system == 'Windows':
+        folder = 'C:/ProgramData/tempdir/data'
+    elif platform.uname().system == 'Ubuntu':
+        folder = '/tempdir/data'
     server_sock = socket.socket()
-    folder=''
     try:
         server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, BUFF)
@@ -44,11 +49,6 @@ def main():
         server_sock.listen(65535)
         while True:
             client, address = server_sock.accept()
-            # print(platform.uname().system)
-            if platform.uname().system == 'Windows':
-                folder='C:/ProgramData/tempdir/data'
-            elif platform.uname().system == 'Ubuntu':
-                folder='C:/ProgramData/tempdir/data'
             recv_dir(folder, client)
     except:
         server_sock.close()

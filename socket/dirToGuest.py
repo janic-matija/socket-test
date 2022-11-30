@@ -8,7 +8,8 @@ start = time.time()
 BUFF = 1_000_000_000
 HOST = "192.168.122.17"
 HOST2 = "192.168.100.231"
-PORT = 9990
+HOSTWIN = "192.168.1.5"
+PORT = 9999
 
 
 def active_ips():
@@ -26,7 +27,7 @@ def active_ips():
 def send_dir(folder, sock):
     to_server = sock
     while True:
-        print(f'Host conected to {HOST}:{PORT}')
+        print(f'Host conected to guest')
         with to_server:
             for path, dirs, files in os.walk(folder):
                 for file in files:
@@ -51,9 +52,8 @@ def send_dir(folder, sock):
 
 def main():
     start_time = start
-    send_to = active_ips()
-    if len(sys.argv) > 1:
-        send_to = ['10.18.110.57']
+    send_to = [HOSTWIN]
+    # send_to = active_ips()
     print(send_to)
 
     for ip in send_to:
@@ -65,7 +65,7 @@ def main():
             socket.SO_SNDBUF,
             BUFF)
         client_sock.connect((ip, PORT))
-        send_dir('data2', client_sock)
+        send_dir('../data2', client_sock)
         client_sock.close()
         print(time.time() - start_time, end="\n\n")
         start_time = time.time()
